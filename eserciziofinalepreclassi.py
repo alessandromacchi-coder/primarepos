@@ -15,12 +15,12 @@ import ast
 
 memoriatask=open("attività", "r")
 leattivita={}
-"""
+
 def leggidict(nomefile):
     nomefile=open(nomefile, "r")
-    for riga in nomefile:
-        yield nomefile.readline()
+    yield nomefile.readline()
 
+"""
 def aggiungifile(nomefile, dict):
     try:
         nomefile.write(str(dict) + "\n")
@@ -33,23 +33,25 @@ while True:
     match scelta:
         case "1":
             print("hai scelto di inserire un'attività")
+            memoriatask=open("attività", "a")
             task=input("inserisci il nome dell'attività ")
             leattivita[task]=dict(dafare= str(input("inserisci cosa devi fare ")),  contesto=str(input("inserisci il contesto ")), durata=str(input("inserisci la durata dell'attività (in ore) ")))
-            memoriatask=open("attività", "a")
             memoriatask.write(str(leattivita) + "\n")
+            memoriatask.close()
         case "2":
             print("hai scelto di leggere le attività \n")
+            memoriatask=open("attività", "r")
             try:
-                memoriatask=open("attività", "r")
-                for riga in memoriatask:
-                    dizstampa = ast.literal_eval(memoriatask.read()) 
-                    print(dizstampa)
+                dizstampa = ast.literal_eval(memoriatask.read()) 
+                print(dizstampa)
             except:
                 print("database vuoto, inserisci almeno un'attività ")
                 continue
+            memoriatask.close()
         case "3":
             memoriatask=open("attività", "w")
             leattivita.clear()
+            memoriatask.close()
         case "4":
             leggidict(leattivita)
         case "5": 
