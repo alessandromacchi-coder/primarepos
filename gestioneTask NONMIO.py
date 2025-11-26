@@ -24,8 +24,8 @@ from datetime import datetime, date
 
 def openFile(relPath, modalitaApertura):
     try:
-        scriptDir = os.path.dirname(__file__)
-        absFilePath = os.path.join(scriptDir, relPath)
+        scriptDir = os.path.dirname(__file__)     #prendo path file py in exe            #tutto
+        absFilePath = os.path.join(scriptDir, relPath)   #join tra questo file in exe e il 
         return open(absFilePath, modalitaApertura)
     except IOError as e:
         print(f"Errore nell'apertura del file per la scrittura: {e}")
@@ -38,7 +38,7 @@ def sceltaUtente():
         print("Input non valido. Per favore inserisci un numero.")
         return -1
 
-def addTaskToFile(file, **kwargs):
+def addTaskToFile(file, **kwargs): #perchè passa valore=valore se ha kwargs qua
     try:
         descrizione = kwargs.get("descrizione", "")
         contesto = kwargs.get("contesto", "")
@@ -56,7 +56,7 @@ def insertTask(file):
     contesto = input("Inserisci il contesto del task: ")
     try:
         scadenza = datetime.strptime(input("Inserisci la scadenza (YYYY-MM-DD): "), "%Y-%m-%d").date()
-    except ValueError as e:
+    except ValueError as e: #i valueerror solo quando c'è un input?
         print(f"Input non valido: {e}")
         return
     try:
@@ -74,7 +74,7 @@ def insertTask(file):
 
 def readTasksFromFile(file):
     try:
-        for line in file:
+        for line in file: #quindi con un for così il puntatore sarà relativo al numero di righe del file
             descrizione, contesto, scadenza, ore, priorita = line.strip().split(",")
             yield {
                 "descrizione": descrizione,
@@ -88,7 +88,7 @@ def readTasksFromFile(file):
 
 def printTaskFromFile(file):
     try:
-        tasks = list(readTasksFromFile(file))
+        tasks = list(readTasksFromFile(file)) #qui come fa a creare una lista completa se la readtask ne yealda una sola
         for task in tasks:
             print(task)
     except Exception as e:
@@ -110,7 +110,7 @@ def removeTaskFromFile(file):
         for task in tasks:
             print(task)
         taskIndex = int(input("Inserisci l'indice del task da rimuovere: "))
-        tasks.pop(taskIndex)
+        tasks.pop(taskIndex) #cosa fa questo
         saveTasksToFile(tasks)
         print("Task rimosso con successo.")
     except Exception as e:

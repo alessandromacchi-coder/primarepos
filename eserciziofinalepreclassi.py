@@ -13,7 +13,7 @@ from datetime import date
 import ast 
 
 
-memoriatask=open("attività", "r")
+memoriatask=open("attività", "w")
 leattivita={}
 
 def leggidict(nomefile):

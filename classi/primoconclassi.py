@@ -17,7 +17,6 @@ class Studente:
     def setqualita(self, qualita):
         self.qualita=qualita
 
-    
 
 
 studente1=Studente("carlo", "maria", 2, 5)
